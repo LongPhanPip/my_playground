@@ -1,5 +1,5 @@
 # my-playground
-## Description just playing with my code
+## Description: just playing with my code
 
 ## Install python virtual env
 ```
