@@ -1,16 +1,15 @@
-import cv2
+from mnist import MNIST
+import random
 import numpy as np
 import os
 
-MINST_DIR = 'minist_data'
-TRAIN_DIR = os.path.join(MINST_DIR, 'train')
-TEST_DIR = os.path.join(MINST_DIR, 'test')
+MNIST_DIR = 'minist_data'
+TRAIN_DIR = os.path.join(MNIST_DIR, 'train')
+TEST_DIR = os.path.join(MNIST_DIR, 'test')
 
+mndata = MNIST(TRAIN_DIR)
 
-def load_data(dir):
-    for root, dirs, files in os.walk(dir):
-        img = cv2.imread('messi5.jpg')
-        print(img)
+images, labels = mndata.load_training()
 
-
-load_data(os.path.join(MINST_DIR, TRAIN_DIR, 'img'))
+index = random.randrange(0, len(images))
+print(mndata.display(images[index]))

@@ -9,10 +9,6 @@ TRAIN_LABEL_FILE = 'train-labels-idx1-ubyte.gz'
 TEST_IMG_FILE = 't10k-images-idx3-ubyte.gz'
 TEST_LABEL_FILE = 't10k-labels-idx1-ubyte.gz'
 
-TRAIN_IMG_FILENAME = 'train_img.gz'
-TRAIN_LABEL_FILENAME = 'train_label.gz'
-TEST_IMG_FILENAME = 'test_img.gz'
-TEST_LABEL_FILENAME = 'test_label.gz'
 
 MINST_DIR = 'minist_data'
 
@@ -37,10 +33,10 @@ if not os.path.exists(MINST_DIR):
     os.mkdir(os.path.join(MINST_DIR, 'train'))
     os.mkdir(os.path.join(MINST_DIR, 'test'))
 
-train_img_filename = os.path.join(MINST_DIR, 'train', TRAIN_IMG_FILENAME)
-train_label_filename = os.path.join(MINST_DIR, 'train', TRAIN_LABEL_FILENAME)
-test_img_filename = os.path.join(MINST_DIR, 'test', TEST_IMG_FILENAME)
-test_label_filename = os.path.join(MINST_DIR, 'test', TEST_LABEL_FILENAME)
+train_img_filename = os.path.join(MINST_DIR, 'train', TRAIN_IMG_FILE)
+train_label_filename = os.path.join(MINST_DIR, 'train', TRAIN_LABEL_FILE)
+test_img_filename = os.path.join(MINST_DIR, 'test', TEST_IMG_FILE)
+test_label_filename = os.path.join(MINST_DIR, 'test', TEST_LABEL_FILE)
 
 # download file
 print('----Downloading train img file----')

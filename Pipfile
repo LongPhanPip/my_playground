@@ -8,6 +8,7 @@ requests = "*"
 tensorflow = "*"
 wget = "*"
 opencv-python = "*"
+python-mnist = "*"
 
 [dev-packages]
 
