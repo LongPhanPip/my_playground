@@ -1,4 +1,4 @@
-import requests
+import urllib3
 from zipfile import ZipFile
 import os
 
@@ -15,11 +15,13 @@ TEST_LABEL_FILENAME = 'test_label.gz'
 
 MINST_DIR = 'minist_data'
 
+http = urllib3.PoolManager()
+
 
 def download_file(url, filename):
-    r = requests.get(url)
-    with open(filename, 'wb') as f:
-        f.write(r.content)
+    with http.request('GET', url) as ref:
+        with open(filename, 'wb') as f:
+            f.write(r.content)
 
 
 def extract_file(filename, directory):
