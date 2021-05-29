@@ -43,14 +43,14 @@ test_img_filename = os.path.join(MINST_DIR, 'test', TEST_IMG_FILENAME)
 test_label_filename = os.path.join(MINST_DIR, 'test', TEST_LABEL_FILENAME)
 
 # download file
-# print('----Downloading train img file----')
-# download_file(os.path.join(MINIST_URL, TRAIN_IMG_FILE), train_img_filename)
-# print('----Downloading train label file----')
-# download_file(os.path.join(MINIST_URL, TRAIN_LABEL_FILE), train_label_filename)
-# print('----Downloading test img file----')
-# download_file(os.path.join(MINIST_URL, TEST_IMG_FILE), test_img_filename)
-# print('----Downloading test label file----')
-# download_file(os.path.join(MINIST_URL, TEST_LABEL_FILE), test_label_filename)
+print('----Downloading train img file----')
+download_file(os.path.join(MINIST_URL, TRAIN_IMG_FILE), train_img_filename)
+print('----Downloading train label file----')
+download_file(os.path.join(MINIST_URL, TRAIN_LABEL_FILE), train_label_filename)
+print('----Downloading test img file----')
+download_file(os.path.join(MINIST_URL, TEST_IMG_FILE), test_img_filename)
+print('----Downloading test label file----')
+download_file(os.path.join(MINIST_URL, TEST_LABEL_FILE), test_label_filename)
 
 
 # extract file
