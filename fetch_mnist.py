@@ -6,7 +6,7 @@ MINIST_URL = 'http://yann.lecun.com/exdb/mnist/'
 TRAIN_IMG_FILE = 'train-images-idx3-ubyte.gz'
 TRAIN_LABEL_FILE = 'train-labels-idx1-ubyte.gz'
 TEST_IMG_FILE = 't10k-images-idx3-ubyte.gz'
-TEST_LABELFILE = 't10k-labels-idx1-ubyte.gz'
+TEST_LABEL_FILE = 't10k-labels-idx1-ubyte.gz'
 
 TRAIN_IMG_FILENAME = 'train_img.gz'
 TRAIN_LABEL_FILENAME = 'train_label.gz'
@@ -19,9 +19,9 @@ http = urllib3.PoolManager()
 
 
 def download_file(url, filename):
-    with http.request('GET', url) as ref:
+    with http.request('GET', url, preload_content=False) as ref:
         with open(filename, 'wb') as f:
-            f.write(r.content)
+            f.write(ref.data)
 
 
 def extract_file(filename, directory):
@@ -35,13 +35,12 @@ if not os.path.exists(MINST_DIR):
     os.mkdir(os.path.join(MINST_DIR, 'train'))
     os.mkdir(os.path.join(MINST_DIR, 'test'))
 
-
-# download file
 train_img_filename = os.path.join(MINST_DIR, 'train', TRAIN_IMG_FILENAME)
 train_label_filename = os.path.join(MINST_DIR, 'train', TRAIN_LABEL_FILENAME)
 test_img_filename = os.path.join(MINST_DIR, 'test', TEST_IMG_FILENAME)
 test_label_filename = os.path.join(MINST_DIR, 'test', TEST_LABEL_FILENAME)
 
+# download file
 print('----Downloading train img file----')
 download_file(os.path.join(MINIST_URL, TRAIN_IMG_FILE), train_img_filename)
 print('----Downloading train label file----')
