@@ -10,6 +10,7 @@ wget = "*"
 opencv-python = "*"
 python-mnist = "*"
 scikit-learn = "*"
+matplotlib = "*"
 
 [dev-packages]
 
