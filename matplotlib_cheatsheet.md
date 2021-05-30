@@ -23,14 +23,14 @@ CB91_Amber = '#F5B14C'
 ```
 
 # Subplot
-# Easy way
+## Easy way
 ``` python
 
     plt.subplots((x_dim, y_dim), sharex=True, sharey=True, gridspec_kw={'hspace': 0, 'wspace': 0})
     # gridspec_kw : use to determine space between subplot
 
 ```
-# Hard way
+## Hard way
 ``` python
     fig = plt.figure()
     fig.suptitle("Manual controll subplot space")
@@ -40,7 +40,7 @@ CB91_Amber = '#F5B14C'
     plt.subplot(grid[1, :2])
     plt.subplot(grid[1, 2])
 ```
-![grid_spec]('grid_spec.png')
+![grid_spec]('matplotlib/grid_spec.png')
 
 
 # PLot line
