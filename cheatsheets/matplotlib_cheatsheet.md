@@ -49,7 +49,7 @@
     plt.subplot(grid[1, :2])
     plt.subplot(grid[1, 2])
 ```
-![grid_spec](matplotlib / grid_spec.png)
+![grid_spec](../matplotlib/grid_spec.png)
 
 
 # PLot line
