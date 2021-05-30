@@ -28,5 +28,5 @@ output = keras.layers.Dense(10, activation='softmax')(dropout)
 model = keras.Model(inputs=[input_], outputs=[output])
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=20, validation_data=(X_val, y_val))
+model.fit(X_train, y_train, epochs=5, validation_data=(X_val, y_val))
 model.evaluate(X_test, y_test)
