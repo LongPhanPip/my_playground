@@ -9,6 +9,7 @@ tensorflow = "*"
 wget = "*"
 opencv-python = "*"
 python-mnist = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
