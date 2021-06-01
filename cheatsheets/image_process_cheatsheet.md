@@ -9,7 +9,7 @@
     cv2.imshow("Tank", image)
     cv2.waitKey(0)
 ```
-<img src="../images/part_in_app.png" alt="tank" width="400"/>
+<img src="../images/tank_in_app.png" alt="tank" width="400"/>
 
 ## Array attribute
 ```python
