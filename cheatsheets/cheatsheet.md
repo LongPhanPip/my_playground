@@ -18,8 +18,8 @@
 
 ---
 # Archive file
-## Gzip
-### Extract file
+# Gzip
+# Extract file
 ``` python
     import shutil
     import gzip
@@ -29,7 +29,7 @@
             shutil.copyfileobj(ref, f)
 ```
 ## Tar / Zip / Tgz / Bz
-### Extract file
+# Extract file
 ``` python
     import shutil
 
@@ -49,6 +49,10 @@
     path.parts          # -> ('maplotlib', 'grid_spec.png')
     path.suffixes       # -> ['.png']
     list(path.parents)  # -> [PosixPath('maplotlib'), PosixPath('.')]
+
+    path = Path('/mathplotlib')
+    path / 'file.txt'   # -> '/mathplotlib/grid_spec.png/file.txt'
+
 ```
 
 # Create dir/file
