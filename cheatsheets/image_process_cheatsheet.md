@@ -20,7 +20,7 @@
     cv2.imshow("Part", part)
     cv2.waitKey(0)
 ```
-![part](../images/part_in_app.png)
+<img src="../images/part_in_app.png" alt="part" width="400"/>
 
 ## Resize
 ```python
@@ -28,7 +28,7 @@
     cv2.imshow("Resized", resized)
     cv2.waitKey(0)
 ```
-![resized](../images/resize_in_app.png)
+<img src="../images/resize_in_app.png" alt="resize" width="400"/>
 
 ## Rotate
 ```python
@@ -39,7 +39,7 @@
     cv2.imshow("Rotated", rotated)
     cv2.waitKey(0)
 ```
-![rotated](../images/rotate_in_app.png)
+<img src="../images/rotate_in_app.png" alt="rotate" width="400"/>
 
 ## Blur
 ```python
@@ -48,7 +48,7 @@
     cv2.imshow("Blurred", blurred)
     cv2.waitKey(0)
 ```
-![blurred](../images/blur_in_app.png)
+<img src="../images/blur_in_app.png" alt="blur" width="400"/>
 
 ## Drawing
 ### Rectangle
@@ -58,7 +58,7 @@
     cv2.imshow("Draw rect", copy)
     cv2.waitKey(0)
 ```
-![draw_rect](../images/draw_rect_in_app.png)
+<img src="../images/draw_rect_in_app.png" alt="draw_rect" width="400"/>
 
 ### Circle
 ``` python
@@ -67,7 +67,7 @@
     cv2.imshow("Draw circle", copy)
     cv2.waitKey(0)
 ```
-![draw_circle](../images/draw_circle_in_app.png)
+<img src="../images/draw_circle_in_app.png" alt="draw_circle" width="400"/>
 
 ### Line
 ``` python
@@ -76,4 +76,4 @@
     cv2.imshow("Draw line", copy)
     cv2.waitKey(0)
 ```
-![draw_line](../images/draw_line_in_app.png)
+<img src="../images/draw_line_in_app.png" alt="draw_line" width="400"/>
