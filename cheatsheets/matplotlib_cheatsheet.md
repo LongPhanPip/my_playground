@@ -4,7 +4,7 @@
     import matplotlib.pyplot as plt
 ```
 
-## Color
+# Color
 ``` python
     CB91_Blue = '#2CBDFE'
     CB91_Green = '#47DBCD'
@@ -16,7 +16,7 @@
 
 ## Label, Tick, Axis
 ``` python
-    # Title and label
+# Title and label
 
     fig, ax = plt.subplots()
     ax.set_title("title")
@@ -28,18 +28,19 @@
 
     # Axis
     ax.set_axis_off()
+    plt.axis("off")
 
 ```
 
-## Subplot
-### Easy way
+# Subplot
+# Easy way
 ``` python
 
-    plt.subplots((x_dim, y_dim), sharex=True, sharey=True, gridspec_kw={'hspace': 0, 'wspace': 0})
+    plt.subplots(x_dim, y_dim, sharex=True, sharey=True, gridspec_kw={'hspace': 0, 'wspace': 0})
     # gridspec_kw : use to determine space between subplot
 
 ```
-### Hard way
+# Hard way
 ``` python
     fig = plt.figure()
     fig.suptitle("Manual controll subplot space")
@@ -49,10 +50,10 @@
     plt.subplot(grid[1, :2])
     plt.subplot(grid[1, 2])
 ```
-![grid_spec](../matplotlib/grid_spec.png)
+![grid_spec](.. / matplotlib / grid_spec.png)
 
 
-## PLot line
+# PLot line
 ``` python
     fig, ax = plt.subplots()
     ax.plot(X, y, linewidth=2, color=CB91_Blue, linestyle='--', marker='o')
@@ -63,37 +64,37 @@
     # marker
     marker: o;
 ```
-## Scatter
+# Scatter
 ``` python
     fig, ax = plt.subplots()
     ax.scatter(X, Y)
 ```
 
-## Bar
+# Bar
 ``` python
     fig, ax = plt.subplots()
     ax.bar(X, Y)
 ```
-## Show  image
+# Show  image
 ``` python
     fig, ax = plt.subplots()
     ax.imshow(X)
 ```
 
 
-## Contour
+# Contour
 ``` python
     fig, ax = plt.subplots()
     ax.contourf(X)
 ```
 
-## Pie
+# Pie
 ``` python
     fig, ax = plt.subplots()
     ax.contourf(X)
 ```
 
-## Save file
+# Save file
 ``` python
     plt.save("filename")
     # dpi
