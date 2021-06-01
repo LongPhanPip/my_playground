@@ -1,5 +1,5 @@
 # Urllib3
-# Download file
+## Download file
 ``` python
     import urllib3
     http = urllib3.PoolManager()
@@ -18,8 +18,8 @@
 
 ---
 # Archive file
-# Gzip
-# Extract file
+## Gzip
+### Extract file
 ``` python
     import shutil
     import gzip
@@ -29,7 +29,7 @@
             shutil.copyfileobj(ref, f)
 ```
 ## Tar / Zip / Tgz / Bz
-# Extract file
+### Extract file
 ``` python
     import shutil
 
@@ -41,7 +41,7 @@
 ---
 
 # Pathlib
-# Path attribute
+## Path attribute
 ``` python
     from pathlib import Path
     path = Path('/mathplotlib/grid_spec.png')
@@ -55,7 +55,7 @@
 
 ```
 
-# Create dir/file
+## Create dir/file
 ``` python
     path = Path('/numpy/examples/blabla.py')
     try:
@@ -64,27 +64,27 @@
         print({error})
 ```
 
-# Check whether exist
+## Check whether exist
 ``` python
     path.is_file()
     path.is_dir()
     path.exists()
 ```
 
-# Find file
+## Find file
 ``` python
     path = Path('.')
     path.glob('*.py')   # -> find all the python file at this dir
     path.rglob('*.py')  # -> find all the python file at this dir and its subdirs
 ```
 
-# Open file
+## Open file
 ``` python
     with p.open('w', encoding='utf-8') as file:
         file.read()
 ```
 
-# Remove file
+## Remove file
 ``` python
     path.rmdir()
 

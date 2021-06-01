@@ -7,6 +7,13 @@
     # WARNING got certificate verfication problems
 ```
 
+### Load data from files
+``` python
+    file_list = ['files1.csv', 'file2.csv', .....]
+    tf.data.Dataset.list_files(file_list, seed=42, shuffle=True)
+```
+
+
 ### Load image from directory
 ``` python
     keras.preprocessing.image_dataset_from_dicrectory(
