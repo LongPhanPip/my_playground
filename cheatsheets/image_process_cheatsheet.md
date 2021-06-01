@@ -9,7 +9,7 @@
     cv2.imshow("Tank", image)
     cv2.waitKey(0)
 ```
-![tank](/../images/tank_in_app.png)
+![tank](../images/tank_in_app.png)
 
 ## Array attribute
 ```python
