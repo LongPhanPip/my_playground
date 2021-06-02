@@ -77,3 +77,38 @@
     cv2.waitKey(0)
 ```
 <img src="../images/draw_line_in_app.png" alt="draw_line" width="400"/>
+
+### Text
+```python
+    copy = image.copy()
+    cv2.putText(copy, "Here is the text", org=(10, 25), fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=1, color=(0,0,255), thickness=1)
+    cv2.imshow("Draw text", copy)
+    cv2.waitKey(0)
+```
+[List font](https://docs.opencv.org/3.4.1/d0/de1/group__core.html#ga0f9314ea6e35f99bb23f29567fc16e11)
+<img src="../images/draw_text_in_app.png" alt="draw_text" width="400"/>
+
+
+## Gray scale
+```python
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Gray scale", gray)
+    cv2.waitKey(0)
+```
+<img src="../images/gray_scale_in_app.png" alt="gray_scale" width="400"/>
+
+## Edge detection
+```python
+    edged = cv2.Canny(gray, minVal=30, maxVal=150, aperture_size=3) # minVal and maxValis the threshole
+    cv2.imshow("Edged", edged)
+    cv2.waitKey(0)
+```
+<img src="../images/edge_detect_in_app.png" alt="edge_detect" width="400"/>
+
+## Threshole
+```python
+    thresh = cv2.threshold(gray, 225, 255, cv2.THRESH_BINARY_INV)[1]    # [<= 255 or >= 255] -> white otherwise -> black
+    cv2.imshow("Thresh", thresh)
+    cv2.waitKey(0)
+```
+<img src="../images/threshole_in_app.png" alt="threshole" width="400"/>
