@@ -86,6 +86,7 @@
     cv2.waitKey(0)
 ```
 [List font](https://docs.opencv.org/3.4.1/d0/de1/group__core.html#ga0f9314ea6e35f99bb23f29567fc16e11)
+
 <img src="../images/draw_text_in_app.png" alt="draw_text" width="400"/>
 
 
