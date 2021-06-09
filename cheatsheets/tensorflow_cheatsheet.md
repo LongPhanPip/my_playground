@@ -30,6 +30,21 @@
 
 ## Executing
 ### Tensor
+#### Attribute
+```python
+    arr = tf.constant([[1,2,3,4], [5,6,7,8]])
+
+    #   dtype
+    arr.dtype # -> tf.int32
+
+    #   ndim
+    arr.ndim  # -> 2
+
+    #   size
+    tf.size(arr).numpy() # -> 8
+
+```
+
 #### Slicing & Indexing
 ```python
     d = tf.constant(np.arange(30).reshape(2, 3, -1))
@@ -58,14 +73,73 @@
     # array([[1, 2],
     #        [3, 4]], dtype=int32)>
 
+    #   Flatten
+    tf.reshape(a, [-1]) # -> <tf.Tensor: shape=(4,), dtype=int32, numpy=array([1, 2, 3, 4], dtype=int32)>
+
+    #   Transpose
+    tf.transpose(a, [1, 0]) # -> swap axis 0 and 1
+
+```
+#### Cast type
+```python
+    b = tf.constant([1., 2., 3.])
+    # <tf.Tensor: shape=(3,), dtype=float32, numpy=array([1., 2., 3.], dtype=float32)>
+
+    tf.cast(b, tf.int8)
+    # <tf.Tensor: shape=(3,), dtype=int8, numpy=array([1, 2, 3], dtype=int8)>
+```
+
+### Range tensor
+```python
+    ragged = tf.ragged.constant([[1,2,3,4], [5,6], [7]])  # -> <tf.RaggedTensor [[1, 2, 3, 4], [5, 6], [7]]>
+
+    ragged.shape # -> (3, None)
 
 ```
 
+---
+
 ### Automatic differentiation
 ```python
-    x = tf.Variable([np.pi / 3])
+    x1 = tf.Variable(2.0)
+    x2 = tf.Variable(1.0)
     with tf.GradientTape() as t:
-        loss = tf.sin(x)
 
-    grad = t.gradient(loss, x)  # -> <tf.Tensor: shape=(1,), dtype=float32, numpy=array([0.49999997], dtype=float32)>
+        loss = x1 * x1 + x1 * x2
+
+    grad = t.gradient(loss, [x1, x2])
+    # [<tf.Tensor: shape=(), dtype=float32, numpy=5.0>,
+    #  <tf.Tensor: shape=(), dtype=float32, numpy=2.0>]
+
+
+    c = tf.constant(1.0)
+    with tf.GradientTape(watch_accessed_variables=False) as tape:
+        tape.watch(c)
+        loss = c * c + 3 * c
+
+    grad = tape.gradient(loss, c)
+    # <tf.Tensor: shape=(), dtype=float32, numpy=5.0>
+
+
+    x = tf.constant(2.0)
+    with tf.GradientTape(persistent=True) as tape:
+        tape.watch(a)
+        y = x * x
+        z = y * y + y
+
+    grad1 = tape.gradient(z, y)
+    # <tf.Tensor: shape=(), dtype=float32, numpy=9.0>
+
+    grad2 = tape.gradient(y, x)
+    # <tf.Tensor: shape=(), dtype=float32, numpy=36.0>
+
+
+    x = tf.Variable([2., 2.])
+    y = tf.Variable(3.)
+    with tf.GradientTape() as tape:
+      z = y**2
+
+    tape.gradient(z, x, unconnected_gradients=tf.UnconnectedGradients.ZERO)
+    # tf.Tensor([0. 0.], shape=(2,), dtype=float32)
+
 ```
