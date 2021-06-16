@@ -11,6 +11,7 @@ opencv-python = "*"
 python-mnist = "*"
 scikit-learn = "*"
 matplotlib = "*"
+pandas = "*"
 
 [dev-packages]
 
