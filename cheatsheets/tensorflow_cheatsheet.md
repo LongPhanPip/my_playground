@@ -47,6 +47,38 @@
 ```
  For more [tf.image](https://www.tensorflow.org/api_docs/python/tf/image)
 
+### CSV processing
+```python
+    import pandas as pd
+    import numpy as np
+    data = pd.read_csv('filename.csv')
+    label = data.pop('label_colunm')
+    feature = data
+
+    # create input layer
+    inputs = {}
+    for name, column in feature.items():
+        dtype = column.dtype
+        if dtype == object:
+            dtype = tf.string
+        else:
+            dtype = tf.float32
+
+        # 1 column 1 input with shape(1,)
+        inputs[name] = tf.keras.Input(shape=(1,), name=name, dtype=dtype)
+
+    # separate numeric and string
+    numeric_input = {name : input for name, input in inputs.items() if input.dtype==tf.float32}
+
+    # process numeric input
+    # process string input
+
+    # create concat layer
+    concat = tf.keras.layers.Concateante()(inputs)
+
+
+```
+
 ---
 
 # Tensorflow
