@@ -97,6 +97,61 @@
 
 
 ```
+### Categorical
+```python
+    df = pd.DataFrame({"value": np.random.randint(0, 100, 10)})
+    #    value
+    # 0     36
+    # 1     68
+    # 2     11
+    # 3     63
+    # 4     25
+    # 5     96
+    # 6     99
+    # 7     93
+    # 8     55
+    # 9     65
+
+    pd.cut(df.value, range(0, 105, 10))
+    # 0     (30, 40]
+    # 1     (60, 70]
+    # 2     (10, 20]
+    # 3     (60, 70]
+    # 4     (20, 30]
+    # 5    (90, 100]
+    # 6    (90, 100]
+    # 7    (90, 100]
+    # 8     (50, 60]
+    # 9     (60, 70]
+    # Name: value, dtype: category
+    # Categories (10, interval[int64]): [(0, 10] < (10, 20] < (20, 30] < (30, 40] ... (60,  70] < (70, 80] < (80, 90] < (90, 100]]
+
+    df = pd.Categorical(['a', 'b', 'c'], categories=['a', 'b'])
+    # ['a', 'b', NaN]
+    # Categories (2, object): ['a', 'b']
+
+    df.categories
+    # Index(['a', 'b'], dtype='object')
+
+    df = pd.DataFrame({'value': ['y', 'n', 'y', 'n']})
+    #   value
+    # 0     y
+    # 1     n
+    # 2     y
+    # 3     n
+
+    df.value = pd.Categorical(df.value)
+    df.value.cat.codes
+    # 0    1
+    # 1    0
+    # 2    1
+    # 3    0
+    # dtype: int8
+
+
+```
+
+
 ### Conditional index
 ```python
     data = {"one": [1, 2, 3], "two": [4, np.nan, 5]}

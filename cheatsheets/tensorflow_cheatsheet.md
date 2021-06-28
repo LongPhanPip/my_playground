@@ -25,7 +25,18 @@
     )
     # subset = 'training' | 'validation'
 ```
+### Load text file from directory
+```python
+    keras.preprocessing.text_dataset_from_directory(
+        'data_dir',
+        validation_split='<percent>',
+        subset='<name_supset>',
+        seed=42,
+        batch_size=batch_size
+    )
+    # subset = 'training' | 'validation'
 
+```
 
 ### File processing
 ```python
@@ -75,6 +86,52 @@
 
     # create concat layer
     concat = tf.keras.layers.Concateante()(inputs)
+
+```
+
+### Text processing
+```python
+    VOCAL_SIZE = 10000
+
+    # birary mode [1.0, 0.0, 0.0,..., 0.0, 0.0]
+    binary_layer = keras.processing.TextVectorization(
+        max_tokens=VOCAL_SIZE,
+        output_mode='binary'
+    )
+
+    # int mode [24.0, 531.0, 4.0, 0.0,..., 65.0, 1.0]
+    MAX_SEQUENCE_LENGTH=250
+    int_layer = keras.processing.TextVectorization(
+        max_tokens=VOCAL_SIZE,
+        output_model='int',
+        output_sequence_length=MAX_SEQUENCE_LENGTH
+    )
+
+    binary_layer.apapt('<train_ds>')    # -> to create index
+    int_layer.apapt('<train_ds>')       #
+
+    keras.preprocessing.TextLineDataset('<text_file>')  # -> Read file and seperate each line of text is one instance
+
+    tokenizer = tf.text.UnicodeUnicodeScriptTokenizer   # -> Split word by space, punctuation character
+    tokenizer.tokenize('<text_line>')
+
+
+    # Create one category table
+    vocab = ['a', 'b', 'c', 'hi', 'hello']
+    vocab_size = len(vocab)
+    num_oov_buckets = 2
+    values = range(1 + num_oov_buckets, vocab_size + 1 + num_oov_buckets)   # 0 for padding
+    init = tf.lookup.KeyValueTensorInitializer(keys=vocal, values=values, key_dtype=tf.string, value_dtype=tf.int64)
+    vocab_table = tf.lookup.StaticVocabularyTable(init, num_oov_buckets)
+
+    # create text processing layer
+    preprocess_layer = keras.preprocessing.TextVectorization(
+        max_tokens=vocab_size,
+        standardize=tf_text.case_fold_utf8,
+        split=tokenizer.tokenize,
+        output_mode='int',
+        output_sequence_length=MAX_SEQUENCE_LENGTH)
+    preprocess_layer.set_vocabulary(vocab)
 
 
 ```
@@ -271,5 +328,115 @@
     mode.save('filename')   # Save to file
 
     tf.keras.models.loaf_model('filename')  # Load model from file
+
+```
+
+---
+# Custom model
+## Custom layer
+### Layer operation
+```python
+    # Basic layer
+    layer = tf.keras.layers.Dense(10)
+
+    # To use layer just call it
+    layer(tf.arange(10).reshape(1, -1))
+    # <tf.Tensor: shape=(1, 10), dtype=float32, numpy=
+    # array([[ 9.4073105,  1.5531795,  8.866978 , -6.4064355, -4.562314 ,
+    #          1.3550291,  7.9261227, -4.917206 ,  2.6355855,  0.9796776]],
+    #       dtype=float32)>
+
+    layer.variables     # -> variables of layer kernel and bias
+    layer.kernel, layer.bias
+
+```
+### Create custom layer
+```python
+    class Customlayer(tf.keras.layers.Layer):
+        def __init__(self, num_outputs, **kwargs):
+            super(Customlayer, self).__init__()
+            self.num_outputs = num_outputs
+
+        # Will call when first get input to build layer
+        def build(self, input_shape):
+            self.kernel = self.add_weight("kernel",
+                                          shape=[int(input_shape[-1]), self.num_outputs],
+                                          initializer="random_normal",
+                                          trainable=True)
+            self.bias = self.add_weight("bias",
+                                        shape=num_outputs,
+                                        initializer="zeros",
+                                        trainable=True)
+
+        # Call for the output
+        def call(self, inputs):
+            return tf.matmul(inputs, self.kernel) + self.bias
+
+    layer = Customlayer(10)
+
+```
+
+## Custom block
+```python
+    class ResnetIdentityBlock(tf.keras.Model):
+        def __init__(self, kernel_size, filters):
+            super(ResnetIdentityBlock, self).__init__(name='')
+            filters1, filters2, filters3 = filters
+
+            self.conv2a = tf.keras.layers.Conv2D(filters1, (1, 1))
+            self.bn2a = tf.keras.layers.BatchNormalization()
+
+            self.conv2b = tf.keras.layers.Conv2D(filters2, kernel_size, padding='same')
+            self.bn2b = tf.keras.layers.BatchNormalization()
+
+            self.conv2c = tf.keras.layers.Conv2D(filters3, (1, 1))
+            self.bn2c = tf.keras.layers.BatchNormalization()
+
+        def call(self, input_tensor, training=False):
+            x = self.conv2a(input_tensor)
+            x = self.bn2a(x, training=training)
+            x = tf.nn.relu(x)
+
+            x = self.conv2b(x)
+            x = self.bn2b(x, training=training)
+            x = tf.nn.relu(x)
+
+            x = self.conv2c(x)
+            x = self.bn2c(x, training=training)
+
+            x += input_tensor
+            return tf.nn.relu(x)
+
+
+    block = ResnetIdentityBlock(3, [1, 2, 3])
+
+    block.layers
+    # [<tensorflow.python.keras.layers.convolutional.Conv2D at 0x1666400d0>,
+    #  <tensorflow.python.keras.layers.normalization_v2.BatchNormalization at 0x166701b80>,
+    #  <tensorflow.python.keras.layers.convolutional.Conv2D at 0x1666f9460>,
+    #  <tensorflow.python.keras.layers.normalization_v2.BatchNormalization at 0x1666f98e0>,
+    #  <tensorflow.python.keras.layers.convolutional.Conv2D at 0x1666f9c10>,
+    #  <tensorflow.python.keras.layers.normalization_v2.BatchNormalization at 0x1666f9df0>]
+
+    block.summary()
+    Model: "resnet_identity_block_1"
+    # _________________________________________________________________
+    # Layer (type)                 Output Shape              Param #
+    # =================================================================
+    # conv2d_3 (Conv2D)            multiple                  4
+    # _________________________________________________________________
+    # batch_normalization_3 (Batch multiple                  4
+    # _________________________________________________________________
+    # conv2d_4 (Conv2D)            multiple                  4
+    # _________________________________________________________________
+    # batch_normalization_4 (Batch multiple                  8
+    # _________________________________________________________________
+    # conv2d_5 (Conv2D)            multiple                  9
+    # _________________________________________________________________
+    # batch_normalization_5 (Batch multiple                  12
+    # =================================================================
+    # Total params: 41
+    # Trainable params: 29
+    # Non-trainable params: 12
 
 ```
