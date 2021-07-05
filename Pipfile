@@ -12,6 +12,10 @@ python-mnist = "*"
 scikit-learn = "*"
 matplotlib = "*"
 pandas = "*"
+nltk = "*"
+tensorflow-text = "*"
+emoji = "*"
+bpemb = "*"
 
 [dev-packages]
 
