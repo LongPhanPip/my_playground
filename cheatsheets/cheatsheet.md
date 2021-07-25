@@ -89,3 +89,49 @@
     path.rmdir()
 
 ```
+
+---
+
+# Parallel Processing
+## Multiprocessing
+```python
+    import concurrent.futures
+
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        list_args = []
+        results = [executor.submit(func, *args) for args in list_args]
+
+        for result in concurrent.futures.as_completed(results):
+            print(result)
+
+
+    with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
+        list_args = []
+        results = executor.map(func, list_args)
+
+        get_result = list(result)
+
+
+```
+
+## Threading
+```python
+    import concurrent.futures
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        list_args = []
+        results = [executor.submit(func, *args) for args in list_args]
+
+        for result in concurrent.futures.as_completed(results):
+            print(result)
+
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+        list_args = []
+        results = executor.map(func, list_args)
+
+        get_result = list(result)
+
+
+```
+
